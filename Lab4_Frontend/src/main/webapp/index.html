@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Internship Management System - Home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0; padding: 20px; min-height: 100vh;
+        }
+        .container {
+            max-width: 700px; margin: 60px auto;
+            background-color: white; padding: 40px;
+            border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        h1 { color: #333; margin-bottom: 5px; }
+        h2 { color: #666; font-weight: normal; margin-bottom: 10px; }
+        .badge {
+            display: inline-block; background: #e8f4f8; color: #004085;
+            border: 1px solid #b8d6ee; border-radius: 20px;
+            padding: 4px 14px; font-size: 12px; margin-bottom: 20px;
+        }
+        .description { text-align: left; margin: 20px 0; color: #555; line-height: 1.6; }
+        .portals { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 25px; }
+        .portal-card {
+            background: #f8f9fa; border-radius: 8px; padding: 20px 25px;
+            flex: 1; min-width: 160px; text-align: center;
+            border: 2px solid #e0e0e0; transition: border-color 0.2s;
+        }
+        .portal-card:hover { border-color: #aaa; }
+        .portal-card h3 { margin: 0 0 12px; font-size: 15px; color: #333; }
+        .btn {
+            display: inline-block; padding: 10px 22px;
+            background-color: #004085; color: white;
+            text-decoration: none; border-radius: 5px;
+            font-size: 14px; font-weight: bold;
+            transition: background-color 0.2s; margin: 3px 2px;
+        }
+        .btn:hover { background-color: #003366; }
+        .btn-green  { background-color: #28a745; }
+        .btn-green:hover  { background-color: #218838; }
+        .btn-orange { background-color: #e65100; }
+        .btn-orange:hover { background-color: #bf360c; }
+        .btn-purple { background-color: #4a148c; }
+        .btn-purple:hover { background-color: #311b92; }
+        .btn-gray   { background-color: #555; }
+        .btn-gray:hover { background-color: #333; }
+        .search-section {
+            background: #e8f4f8; border-radius: 8px;
+            padding: 18px 20px; margin: 20px 0; text-align: left;
+        }
+        .search-section h3 { margin: 0 0 12px; color: #003366; font-size: 15px; }
+        .search-row { display: flex; gap: 8px; flex-wrap: wrap; }
+        .search-row input {
+            flex: 1; min-width: 100px; padding: 8px;
+            border: 1px solid #ccc; border-radius: 4px; font-size: 13px;
+        }
+        .search-row button {
+            padding: 8px 18px; background-color: #004085; color: white;
+            border: none; border-radius: 4px; cursor: pointer; font-size: 13px;
+        }
+        .search-row button:hover { background-color: #003366; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>&#127891; Student Internship &amp; Placement</h1>
+    <h2>Management System</h2>
+    <div class="badge">&#9679; Lab 4 - Frontend Microservice (JWT Auth)</div>
+    <div class="description">
+        <p>Welcome to the Internship and Placement Management System.
+           Search for opportunities, apply with your profile, and track your
+           applications — all in one place.</p>
+    </div>
+
+    <!-- Public Search - no login required -->
+    <div class="search-section">
+        <h3>&#128269; Search Opportunities <em style="font-weight:normal;font-size:12px;">(No Login Required)</em></h3>
+        <form action="SearchOpportunities" method="GET">
+            <div class="search-row">
+                <input type="text" name="company" placeholder="Company..." />
+                <input type="text" name="title"   placeholder="Job title..." />
+                <input type="text" name="skills"  placeholder="Skills..." />
+                <button type="submit">Search</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="portals">
+        <div class="portal-card">
+            <h3>&#127891; Students</h3>
+            <a href="login.html" class="btn btn-green">Login</a><br/>
+            <a href="register.html" class="btn btn-gray" style="margin-top:6px;display:inline-block;">Register</a>
+        </div>
+        <div class="portal-card">
+            <h3>&#127970; Employers</h3>
+            <a href="employerLogin.html" class="btn btn-orange">Login</a><br/>
+            <a href="employerRegister.html" class="btn btn-gray" style="margin-top:6px;display:inline-block;">Register</a>
+        </div>
+        <div class="portal-card">
+            <h3>&#128101; Coordinator</h3>
+            <a href="coordinatorLogin.html" class="btn btn-purple">Login</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

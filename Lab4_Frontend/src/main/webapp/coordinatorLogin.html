@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Coordinator Login - Internship Management System</title>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; }
+        .container { max-width: 400px; margin: 70px auto; background-color: white;
+                     padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #4a148c; text-align: center; margin-bottom: 25px; }
+        .form-group { margin-bottom: 18px; }
+        label { display: block; margin-bottom: 5px; color: #555; font-weight: bold; font-size: 14px; }
+        input[type="text"], input[type="password"] {
+            width: 100%; padding: 10px; border: 1px solid #ddd;
+            border-radius: 4px; box-sizing: border-box; font-size: 14px; }
+        input[type="submit"] {
+            width: 100%; padding: 12px; background-color: #4a148c;
+            color: white; border: none; border-radius: 4px;
+            cursor: pointer; font-size: 16px; font-weight: bold; }
+        input[type="submit"]:hover { background-color: #311b92; }
+        .note { margin-top: 12px; padding: 10px; background-color: #f3e5f5;
+                border-left: 4px solid #4a148c; font-size: 12px; color: #4a148c; }
+        .links { text-align: center; margin-top: 15px; font-size: 13px; }
+        .links a { color: #4a148c; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Coordinator Login</h1>
+        <form action="ManageSystem" method="post">
+            <input type="hidden" name="action" value="dashboard">
+            <div class="form-group">
+                <label>Username:</label>
+                <input type="text" name="username" required placeholder="coordinator">
+            </div>
+            <div class="form-group">
+                <label>Password:</label>
+                <input type="password" name="password" required placeholder="coord123">
+            </div>
+            <input type="submit" value="Access Dashboard">
+        </form>
+        <div class="note"><strong>Demo:</strong> coordinator / coord123</div>
+        <div class="links"><a href="index.html">&#8592; Back to Home</a></div>
+    </div>
+</body>
+</html>

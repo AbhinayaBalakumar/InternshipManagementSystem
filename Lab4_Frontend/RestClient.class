@@ -1,0 +1,233 @@
+// Source code is decompiled from a .class file using FernFlower decompiler (from Intellij IDEA).
+package com.mycompany.lab4.frontend.Helper;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+
+public class RestClient {
+   public static final String STUDENT_BASE = "http://student:8080/student/api";
+   public static final String EMPLOYER_BASE = "http://employer:8080/employer/api";
+   public static final String COORDINATOR_BASE = "http://coordinator:8080/coordinator/api";
+
+   public RestClient() {
+   }
+
+   private static String resolveBase(String endpoint) {
+      if (endpoint.startsWith("/coordinator/")) {
+         return "http://coordinator:8080/coordinator/api";
+      } else if (endpoint.startsWith("/auth/employer-login")) {
+         return "http://employer:8080/employer/api";
+      } else if (endpoint.startsWith("/auth/student-login")) {
+         return "http://student:8080/student/api";
+      } else if (endpoint.startsWith("/employers/")) {
+         return "http://employer:8080/employer/api";
+      } else if (endpoint.startsWith("/students/")) {
+         return "http://student:8080/student/api";
+      } else if (endpoint.startsWith("/my-postings")) {
+         return "http://employer:8080/employer/api";
+      } else if (endpoint.startsWith("/apply")) {
+         return "http://student:8080/student/api";
+      } else if (endpoint.startsWith("/applications/my-status")) {
+         return "http://student:8080/student/api";
+      } else if (endpoint.startsWith("/applications/by-opportunity")) {
+         return "http://employer:8080/employer/api";
+      } else if (endpoint.startsWith("/applications/update-status")) {
+         return "http://employer:8080/employer/api";
+      } else if (endpoint.startsWith("/opportunities")) {
+         return "http://student:8080/student/api";
+      } else {
+         return endpoint.startsWith("/sync/") ? "http://student:8080/student/api" : "http://student:8080/student/api";
+      }
+   }
+
+   public static String get(String endpoint, String jwtToken) {
+      try {
+         String var10002 = resolveBase(endpoint);
+         URL url = new URL(var10002 + endpoint);
+         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+         conn.setRequestMethod("GET");
+         conn.setRequestProperty("Accept", "application/json");
+         if (jwtToken != null && !jwtToken.isEmpty()) {
+            conn.setRequestProperty("Authorization", "Bearer " + jwtToken);
+         }
+
+         conn.setConnectTimeout(5000);
+         conn.setReadTimeout(5000);
+         int status = conn.getResponseCode();
+         return status == 401 ? "{\"error\":\"unauthorized\"}" : readResponse(conn, status);
+      } catch (IOException e) {
+         return "{\"error\":\"" + e.getMessage() + "\"}";
+      }
+   }
+
+   public static String post(String endpoint, String jsonBody, String jwtToken) {
+      try {
+         String var10002 = resolveBase(endpoint);
+         URL url = new URL(var10002 + endpoint);
+         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+         conn.setRequestMethod("POST");
+         conn.setRequestProperty("Content-Type", "application/json");
+         conn.setRequestProperty("Accept", "application/json");
+         if (jwtToken != null && !jwtToken.isEmpty()) {
+            conn.setRequestProperty("Authorization", "Bearer " + jwtToken);
+         }
+
+         conn.setDoOutput(true);
+         conn.setConnectTimeout(5000);
+         conn.setReadTimeout(5000);
+         OutputStream os = conn.getOutputStream();
+
+         try {
+            os.write(jsonBody.getBytes(StandardCharsets.UTF_8));
+         } catch (Throwable var9) {
+            if (os != null) {
+               try {
+                  os.close();
+               } catch (Throwable var8) {
+                  var9.addSuppressed(var8);
+               }
+            }
+
+            throw var9;
+         }
+
+         if (os != null) {
+            os.close();
+         }
+
+         int status = conn.getResponseCode();
+         return status == 401 ? "{\"error\":\"unauthorized\"}" : readResponse(conn, status);
+      } catch (IOException e) {
+         return "{\"error\":\"" + e.getMessage() + "\"}";
+      }
+   }
+
+   public static String postToEmployer(String endpoint, String jsonBody, String jwtToken) {
+      try {
+         URL url = new URL("http://employer:8080/employer/api" + endpoint);
+         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+         conn.setRequestMethod("POST");
+         conn.setRequestProperty("Content-Type", "application/json");
+         conn.setRequestProperty("Accept", "application/json");
+         if (jwtToken != null && !jwtToken.isEmpty()) {
+            conn.setRequestProperty("Authorization", "Bearer " + jwtToken);
+         }
+
+         conn.setDoOutput(true);
+         conn.setConnectTimeout(5000);
+         conn.setReadTimeout(5000);
+         OutputStream os = conn.getOutputStream();
+
+         try {
+            os.write(jsonBody.getBytes(StandardCharsets.UTF_8));
+         } catch (Throwable var9) {
+            if (os != null) {
+               try {
+                  os.close();
+               } catch (Throwable var8) {
+                  var9.addSuppressed(var8);
+               }
+            }
+
+            throw var9;
+         }
+
+         if (os != null) {
+            os.close();
+         }
+
+         int status = conn.getResponseCode();
+         return status == 401 ? "{\"error\":\"unauthorized\"}" : readResponse(conn, status);
+      } catch (IOException e) {
+         return "{\"error\":\"" + e.getMessage() + "\"}";
+      }
+   }
+
+   public static String postToBase(String base, String endpoint, String jsonBody) {
+      try {
+         URL url = new URL(base + endpoint);
+         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+         conn.setRequestMethod("POST");
+         conn.setRequestProperty("Content-Type", "application/json");
+         conn.setRequestProperty("Accept", "application/json");
+         conn.setDoOutput(true);
+         conn.setConnectTimeout(5000);
+         conn.setReadTimeout(5000);
+         OutputStream os = conn.getOutputStream();
+
+         try {
+            os.write(jsonBody.getBytes(StandardCharsets.UTF_8));
+         } catch (Throwable var9) {
+            if (os != null) {
+               try {
+                  os.close();
+               } catch (Throwable var8) {
+                  var9.addSuppressed(var8);
+               }
+            }
+
+            throw var9;
+         }
+
+         if (os != null) {
+            os.close();
+         }
+
+         return readResponse(conn, conn.getResponseCode());
+      } catch (IOException e) {
+         return "{\"error\":\"" + e.getMessage() + "\"}";
+      }
+   }
+
+   public static String getCoordinator(String endpoint, String user, String pass) {
+      try {
+         URL url = new URL("http://coordinator:8080/coordinator/api" + endpoint);
+         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+         conn.setRequestMethod("GET");
+         conn.setRequestProperty("Accept", "application/json");
+         conn.setRequestProperty("X-Coord-User", user);
+         conn.setRequestProperty("X-Coord-Pass", pass);
+         conn.setConnectTimeout(5000);
+         conn.setReadTimeout(5000);
+         return readResponse(conn, conn.getResponseCode());
+      } catch (IOException e) {
+         return "{\"error\":\"" + e.getMessage() + "\"}";
+      }
+   }
+
+   public static String postCoordinator(String endpoint, String formParams, String user, String pass) {
+      try {
+         URL url = new URL("http://coordinator:8080/coordinator/api" + endpoint + "?" + formParams);
+         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+         conn.setRequestMethod("POST");
+         conn.setRequestProperty("Accept", "application/json");
+         conn.setRequestProperty("X-Coord-User", user);
+         conn.setRequestProperty("X-Coord-Pass", pass);
+         conn.setDoOutput(true);
+         conn.setConnectTimeout(5000);
+         conn.setReadTimeout(5000);
+         conn.getOutputStream().write(new byte[0]);
+         return readResponse(conn, conn.getResponseCode());
+      } catch (IOException e) {
+         return "{\"error\":\"" + e.getMessage() + "\"}";
+      }
+   }
+
+   private static String readResponse(HttpURLConnection conn, int status) throws IOException {
+      BufferedReader br = new BufferedReader(new InputStreamReader(status >= 200 && status < 300 ? conn.getInputStream() : conn.getErrorStream(), StandardCharsets.UTF_8));
+      StringBuilder sb = new StringBuilder();
+
+      String line;
+      while((line = br.readLine()) != null) {
+         sb.append(line);
+      }
+
+      br.close();
+      return sb.toString();
+   }
+}

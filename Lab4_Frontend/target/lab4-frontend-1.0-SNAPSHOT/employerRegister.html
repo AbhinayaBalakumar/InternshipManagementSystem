@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employer Registration - IPMS</title>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; }
+        .container { max-width: 450px; margin: 50px auto; background-color: white;
+                     padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #e65100; text-align: center; margin-bottom: 5px; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 25px; font-size: 14px; }
+        .form-group { margin-bottom: 18px; }
+        label { display: block; margin-bottom: 5px; color: #555; font-weight: bold; font-size: 14px; }
+        input[type="text"], input[type="password"] {
+            width: 100%; padding: 10px; border: 1px solid #ddd;
+            border-radius: 4px; box-sizing: border-box; font-size: 14px; }
+        input[type="submit"] {
+            width: 100%; padding: 12px; background-color: #e65100;
+            color: white; border: none; border-radius: 4px;
+            cursor: pointer; font-size: 16px; font-weight: bold; }
+        input[type="submit"]:hover { background-color: #bf360c; }
+        .note { margin-top: 12px; padding: 10px; background-color: #fff3e0;
+                border-left: 4px solid #e65100; font-size: 12px; color: #e65100; }
+        .links { text-align: center; margin-top: 15px; font-size: 13px; }
+        .links a { color: #e65100; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>&#127970; Employer Registration</h1>
+        <div class="subtitle">Internship &amp; Placement Management</div>
+        <form action="EmployerRegister" method="post">
+            <div class="form-group">
+                <label>Company Name:</label>
+                <input type="text" name="companyName" required placeholder="e.g. TechCorp Inc.">
+            </div>
+            <div class="form-group">
+                <label>Industry:</label>
+                <input type="text" name="industry" placeholder="e.g. Software, Finance">
+            </div>
+            <div class="form-group">
+                <label>Location:</label>
+                <input type="text" name="location" placeholder="e.g. Toronto, ON">
+            </div>
+            <div class="form-group">
+                <label>Username:</label>
+                <input type="text" name="username" required placeholder="Choose a username">
+            </div>
+            <div class="form-group">
+                <label>Password:</label>
+                <input type="password" name="password" required placeholder="Choose a password">
+            </div>
+            <input type="submit" value="Register">
+        </form>
+        <div class="note">After registering you can log in and post opportunities.</div>
+        <div class="links">
+            <a href="employerLogin.html">Already have an account? Login here</a> &nbsp;|&nbsp;
+            <a href="index.html">&#8592; Home</a>
+        </div>
+    </div>
+</body>
+</html>
