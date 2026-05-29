@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>IPMS Backend API - Lab 4</title>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: Arial, sans-serif; background: #1e1e2e; color: #cdd6f4; margin: 0; padding: 30px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { color: #89b4fa; border-bottom: 2px solid #313244; padding-bottom: 10px; }
+        h2 { color: #cba6f7; margin-top: 25px; font-size: 16px; }
+        .endpoint { background: #313244; border-radius: 6px; padding: 15px; margin: 10px 0; }
+        .method { display: inline-block; padding: 3px 10px; border-radius: 4px;
+                  font-size: 12px; font-weight: bold; margin-right: 10px; }
+        .get    { background: #a6e3a1; color: #1e1e2e; }
+        .post   { background: #89b4fa; color: #1e1e2e; }
+        .url    { font-family: monospace; font-size: 14px; color: #f9e2af; }
+        .desc   { font-size: 13px; color: #a6adc8; margin-top: 6px; }
+        .auth   { font-size: 11px; color: #fab387; margin-top: 4px; }
+        .badge  { display: inline-block; background: #45475a; padding: 2px 8px;
+                  border-radius: 10px; font-size: 11px; color: #cdd6f4; margin-right: 4px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>&#128279; IPMS Backend Microservice API</h1>
+    <p style="color:#a6adc8;">Lab 4 &mdash; REST API with JWT Authentication &mdash; COE692</p>
+    <p style="color:#a6adc8;">Base URL: <code style="color:#f9e2af;">http://localhost:8080/lab4-backend</code></p>
+
+    <h2>&#128275; Authentication</h2>
+    <div class="endpoint">
+        <span class="method post">POST</span>
+        <span class="url">/api/auth/student-login</span>
+        <div class="desc">Authenticate student credentials. Returns userId and studentName.</div>
+        <div class="auth">&#128513; PUBLIC &mdash; no JWT required</div>
+    </div>
+    <div class="endpoint">
+        <span class="method post">POST</span>
+        <span class="url">/api/auth/employer-login</span>
+        <div class="desc">Authenticate employer credentials. Returns userId and companyName.</div>
+        <div class="auth">&#128513; PUBLIC &mdash; no JWT required</div>
+    </div>
+
+    <h2>&#128188; Opportunities</h2>
+    <div class="endpoint">
+        <span class="method get">GET</span>
+        <span class="url">/api/opportunities</span>
+        <div class="desc">List all open opportunities. Optional filters: ?company=&amp;title=&amp;skills=</div>
+        <div class="auth">&#128513; PUBLIC &mdash; no JWT required</div>
+    </div>
+    <div class="endpoint">
+        <span class="method post">POST</span>
+        <span class="url">/api/opportunities</span>
+        <div class="desc">Post a new internship/job opportunity. employerId taken from JWT.</div>
+        <div class="auth">&#128274; PROTECTED &mdash; <span class="badge">EMPLOYER</span> JWT required</div>
+    </div>
+
+    <h2>&#128203; Applications</h2>
+    <div class="endpoint">
+        <span class="method post">POST</span>
+        <span class="url">/api/apply</span>
+        <div class="desc">Apply for an opportunity. studentId taken from JWT (not request body).</div>
+        <div class="auth">&#128274; PROTECTED &mdash; <span class="badge">STUDENT</span> JWT required</div>
+    </div>
+    <div class="endpoint">
+        <span class="method get">GET</span>
+        <span class="url">/api/applications/my-status</span>
+        <div class="desc">Get the logged-in student's application history and statuses.</div>
+        <div class="auth">&#128274; PROTECTED &mdash; <span class="badge">STUDENT</span> JWT required</div>
+    </div>
+    <div class="endpoint">
+        <span class="method get">GET</span>
+        <span class="url">/api/applications/by-opportunity?opportunityId=X</span>
+        <div class="desc">Get applicants for one of the employer's postings.</div>
+        <div class="auth">&#128274; PROTECTED &mdash; <span class="badge">EMPLOYER</span> JWT required</div>
+    </div>
+</div>
+</body>
+</html>
